@@ -1,13 +1,18 @@
 import '../App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import GameControl from './GameControl';
 
 function App() {
   return (
-    <>
+    <Router>
       <Header />
-      <GameControl />
-    </>
+      <Switch>
+        <Route path='/'>
+          <GameControl />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { withFirestore } from 'react-redux-firebase';
 import CardList from './CardList';
 import Card from './Card';
@@ -12,13 +12,13 @@ class GameControl extends React.Component {
     };
   }
 
-  whenCardClicked = value => {
+  whenCardClicked = id => {
     if (this.state.selectedCard !== null && this.state.isDiscarded !== false) {
       this.setState({
         selectedCard: null,
       });
     } else {
-      this.props.firestore.get({ collection: 'deck', doc: value }).then(card => {
+      this.props.firestore.get({ collection: 'deck', doc: id }).then(card => {
         const firestoreCard = {
           value: card.get('value'),
           cardRule: card.get('cardRule'),
@@ -40,6 +40,7 @@ class GameControl extends React.Component {
     } else {
       currentlyVisibleState
         = <CardList
+          cardList={this.props.masterCardList}
           whenCardClicked={this.whenCardClicked}
         />;
     }
@@ -51,11 +52,11 @@ class GameControl extends React.Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   selectedCard: state.selectedCard,
-// });
+const mapStateToProps = state => ({
+  formVisibleOnPage: state.formVisibleOnPage,
+});
 
 // eslint-disable-next-line no-class-assign
-// GameControl = connect(mapStateToProps)(GameControl);
+GameControl = connect(mapStateToProps)(GameControl);
 
 export default withFirestore(GameControl);

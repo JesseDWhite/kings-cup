@@ -13,7 +13,7 @@ function Card(props) {
       >
         <h2>{props.id}:</h2>
         <br />
-        <h3>Rule: {props.rule}</h3>
+        <h3>Rule: {props.cardRule}</h3>
       </div>
     </>
   );
@@ -21,7 +21,7 @@ function Card(props) {
 
 Card.propTypes = {
   value: PropTypes.number.isRequired,
-  rule: PropTypes.string.isRequired,
+  cardRule: PropTypes.string.isRequired,
   whenCardClicked: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
 };
